@@ -1,6 +1,7 @@
 package ssj.security.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 /**
  * @author harveylo
  **/
+@Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AuthService {
@@ -39,7 +41,12 @@ public class AuthService {
         .map(GrantedAuthority::getAuthority)
         .collect(Collectors.toList());
     String token = JwtTokenUtils.createToken(user.getUserName(), user.getId().toString(), authorities, loginRequest.getRememberMe());
-    stringRedisTemplate.opsForValue().set(user.getId().toString(), token);
+
+   try {
+     stringRedisTemplate.opsForValue().set(user.getId().toString(), token);
+   }catch (Exception e){
+     log.error("Redis 設定失敗 請檢查 Redis 設定");
+   }
     return token;
   }
   public void removeToken() {
