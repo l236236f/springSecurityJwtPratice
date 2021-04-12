@@ -1,6 +1,5 @@
 package ssj.system.config;
 
-import lombok.var;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -38,7 +37,7 @@ public class SwaggerConfig {
     }
 
     private List<SecurityScheme> securitySchemes() {
-        return Collections.singletonList(new ApiKey("Harvey", SecurityConstants.HEADER, "header"));
+        return Collections.singletonList(new ApiKey("JWT", SecurityConstants.HEADER, "header"));
     }
 
     private List<SecurityContext> securityContext() {
