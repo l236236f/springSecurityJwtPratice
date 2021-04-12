@@ -1,6 +1,7 @@
 package ssj.system.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -11,6 +12,7 @@ import java.io.Serializable;
   @NoArgsConstructor
   @Entity
   @Table(name = "user_role")
+  @EqualsAndHashCode(callSuper=false)
   public class UserRole extends AbstractAuditBase implements Serializable {
 
     @Id

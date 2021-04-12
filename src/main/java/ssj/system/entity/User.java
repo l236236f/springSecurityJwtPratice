@@ -1,10 +1,7 @@
 package ssj.system.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import ssj.system.entity.info.representation.UserRepresentation;
@@ -23,6 +20,7 @@ import java.util.stream.Collectors;
 @Builder
 @Entity
 @Table(name = "user")
+@EqualsAndHashCode(callSuper=false)
 public class User extends AbstractAuditBase{
   @Id
   @GeneratedValue(generator = "UUID")

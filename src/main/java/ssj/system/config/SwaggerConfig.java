@@ -1,5 +1,6 @@
 package ssj.system.config;
 
+import lombok.var;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -10,9 +11,11 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import ssj.security.common.constants.SecurityConstants;
+import ssj.security.helper.ConfigHelper;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * @author harveylo
@@ -23,10 +26,11 @@ public class SwaggerConfig {
 
     @Bean
     public Docket createRestApi() {
+        Properties properties = ConfigHelper.getConfig(SecurityConstants.CONFIG_PATH);
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("github.javaguide.springsecurityjwtguide"))
+                .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
                 .build()
                 .securityContexts(securityContext())
@@ -34,7 +38,7 @@ public class SwaggerConfig {
     }
 
     private List<SecurityScheme> securitySchemes() {
-        return Collections.singletonList(new ApiKey("JWT", SecurityConstants.HEADER, "header"));
+        return Collections.singletonList(new ApiKey("Harvey", SecurityConstants.HEADER, "header"));
     }
 
     private List<SecurityContext> securityContext() {

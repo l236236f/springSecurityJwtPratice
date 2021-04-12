@@ -2,6 +2,7 @@ package ssj.system.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "role")
+@EqualsAndHashCode(callSuper=false)
 public class Role extends AbstractAuditBase {
   @Id
   @GeneratedValue(generator = "UUID")
