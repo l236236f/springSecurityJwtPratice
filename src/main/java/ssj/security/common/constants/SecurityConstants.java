@@ -10,7 +10,7 @@ import java.util.Properties;
  */
 public class SecurityConstants {
 
-  public static final String CONFIG_PATH = "/jwt.properties";
+  public static final String CONFIG_PATH = "/springSecurityJwtPratice/jwt.properties";
 
   public static final Properties properties = ConfigHelper.getConfig(SecurityConstants.CONFIG_PATH);
 
